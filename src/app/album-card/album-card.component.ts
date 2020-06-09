@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { ModalContainerComponent } from '../modal-container/modal-container.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-album-card',
@@ -9,14 +11,26 @@ export class AlbumCardComponent implements OnInit {
   @Input() image: string = '../../assets/images/cat001.jpg';
   @Input() description: string;
 
-  constructor() { }
+  constructor(private el: ElementRef, private modalService: NgbModal ) { }
 
-  ngOnInit(): void {
+  // Removed angular div wrapper
+  // https://stackoverflow.com/a/59009696
+  ngOnInit() {
+    let myCardDiv: HTMLElement = this.el.nativeElement,
+      parentElement: HTMLElement = myCardDiv.parentElement;
+    // get all children and move them out of the element
+    while (myCardDiv.firstChild) {
+      parentElement.insertBefore(myCardDiv.firstChild, myCardDiv);
+    }
+    // remove the empty element(the host)
+    parentElement.removeChild(myCardDiv);
   }
 
   //STUB
-  onClickView(picId) {
-
+  onClickView(picId: any) {
+    const modalRef = this.modalService.open(ModalContainerComponent);
+    modalRef.componentInstance.name = 'World';
+    alert(picId);
   }
 
   //STUB

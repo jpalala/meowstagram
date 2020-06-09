@@ -7,6 +7,7 @@ import { BannerComponent } from './banner/banner.component';
 import { NavComponent } from './nav/nav.component';
 import { AlbumCardComponent } from './album-card/album-card.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ModalContainerComponent } from './modal-container/modal-container.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     BannerComponent,
     NavComponent,
     AlbumCardComponent,
-    HomepageComponent
+    HomepageComponent,
+    ModalContainerComponent
   ],
   imports: [
     BrowserModule,
