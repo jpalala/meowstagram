@@ -24,12 +24,13 @@ export class CatpicsService {
     );
   }
 
-  /** GET hero by id. Will 404 if id not found */
+  /** GET Pic by id. Will 404 if id not found */
   getPic(id: string): Observable<PicModal> {
-    const url = `${this.catPicsUrl}/${id}`;
+    const url = this.catPicsUrl + '/' + id;
+    console.log('URL', url);
     return this.http.get<PicModal>(url).pipe(
       tap(_ => this.log(`fetched cat pic id=${id}`)),
-      catchError(this.handleError<PicModal>(`getCatPic id=${id}`))
+      catchError(this.handleError<PicModal>(`Failed to getCatPic with id=${id}`))
     );
   }
 
@@ -61,6 +62,6 @@ export class CatpicsService {
   }
 
   private log(message: string) {
-    console.log('From TODOLISTREPOSITORY:', message);
+    console.log('From CATPICSSERVICE:', message);
   }
 }

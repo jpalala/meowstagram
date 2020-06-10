@@ -1,4 +1,4 @@
-<h3 class="modal-title">I have a nice title</h3>
+<h3 class="modal-title">View/Edit Cat Caption</h3>
 <div class="modal-body">
   <img src="assets/images/cat001.jpg">
   <ng-template>
@@ -9,8 +9,12 @@
   <form #f="ngForm">
     <div class="form-group">
       <label for="Caption">Caption</label>
-      <input type="text" class="form-control" id="title" name="title" required [(ngModel)]="model.caption">
+      <input type="text" class="form-control" id="caption" name="caption" required [(ngModel)]="model.caption">
     </div>
+    <!-- somehow not showing.. -->
+      <input type="text" disabled class="hidden" id="id" name="id" [(ngModel)]="model.id">
+      <input type="text" disabled class="hidden" id="image" name="image"  [(ngModel)]="model.image">
+
   </form>
   <pre>
     {{ model | json }}

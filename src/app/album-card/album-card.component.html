@@ -1,9 +1,9 @@
 <div class="card album-card">
-  <img class="card-img-top" src="{{image}}" alt="{{caption}}">
+  <img class="card-img-top" src="{{_imageFullPath}}" alt="{{caption}}">
   <div class="card-body">
-    <h5 class="card-title">Yet another cat</h5>
+    <h5 class="card-title">Meowstagram</h5>
     <p class="card-text">{{caption}}</p>
-    <a href="#" class="btn btn-primary" (click)="onClickView(picId)">View</a>
-    <a href="#" class="btn btn-secondary" (click)="onClickEdit(picId)">Edit</a>
+    <a href="#" class="btn btn-primary" (click)="onClickView(this.id)">View</a>
+    <a href="#" class="btn btn-secondary" (click)="onClickEdit(this.id)">Edit</a>
   </div>
 </div>

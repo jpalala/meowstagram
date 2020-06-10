@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { ModalContainerComponent } from '../modal-container/modal-container.component';
+
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CatpicsService } from '../catpics.service';
+import { PicModal } from '../picmodal';
 
 @Component({
   selector: 'app-album-card',
@@ -12,30 +15,51 @@ export class AlbumCardComponent implements OnInit {
   @Input() caption: string;
   @Input() image: string = '../../assets/images/cat001.jpg';
   picId: string;
+  picData: PicModal;
 
-  constructor(private el: ElementRef, private modalService: NgbModal ) { }
+  imagePath: string = 'assets/images/';
+  _imageFullPath: string;
 
-  // Removed angular div wrapper
-  // https://stackoverflow.com/a/59009696
+  constructor(private el: ElementRef,
+              private modalService: NgbModal,
+              private catpicsService: CatpicsService ) { }
+
   ngOnInit() {
+    //update path
+    this._imageFullPath = this.imagePath + this.image;
+    this.picId = this.id;
+    //fix div to remove parent div added by angular - https://stackoverflow.com/a/59009696
     let myCardDiv: HTMLElement = this.el.nativeElement,
       parentElement: HTMLElement = myCardDiv.parentElement;
     // get all children and move them out of the element
     while (myCardDiv.firstChild) {
       parentElement.insertBefore(myCardDiv.firstChild, myCardDiv);
     }
-
-    this.picId = this.id;
-    this.image = 'assets/images/' + this.image;
     // remove the empty element(the host)
     parentElement.removeChild(myCardDiv);
   }
 
-  //STUB
+  // view the pic
   onClickView(picId: any) {
+    this.picId = picId;
+    console.log('VIEWING PIC: ', this.picId);
+
     const modalRef = this.modalService.open(ModalContainerComponent);
     modalRef.componentInstance.name = 'Pic_' + picId;
-    console.log('VIEWING: ', picId);
+    modalRef.componentInstance.id = this.id;
+    modalRef.componentInstance.caption = this.caption;
+    modalRef.componentInstance.image = this._imageFullPath;
+
+    // pass the entire pic instance into the instance
+     this.catpicsService.getPic(this.picId).subscribe(
+      (data: PicModal) => {
+        console.log('pIC DATA:', data);
+        /*
+        modalRef.componentInstance.caption= data.caption;
+        modalRef.componentInstance.image = data.image;
+        modalRef.componentInstance.id = data.image;
+        */
+    });
   }
 
   //STUB
