@@ -8,8 +8,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./album-card.component.scss']
 })
 export class AlbumCardComponent implements OnInit {
+  @Input() id: string;
+  @Input() caption: string;
   @Input() image: string = '../../assets/images/cat001.jpg';
-  @Input() description: string;
   picId: string;
 
   constructor(private el: ElementRef, private modalService: NgbModal ) { }
@@ -24,7 +25,8 @@ export class AlbumCardComponent implements OnInit {
       parentElement.insertBefore(myCardDiv.firstChild, myCardDiv);
     }
 
-    this.picId = '1';
+    this.picId = this.id;
+    this.image = 'assets/images/' + this.image;
     // remove the empty element(the host)
     parentElement.removeChild(myCardDiv);
   }
@@ -33,7 +35,7 @@ export class AlbumCardComponent implements OnInit {
   onClickView(picId: any) {
     const modalRef = this.modalService.open(ModalContainerComponent);
     modalRef.componentInstance.name = 'Pic_' + picId;
-    alert(picId);
+    console.log('VIEWING: ', picId);
   }
 
   //STUB

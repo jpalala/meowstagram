@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
 
@@ -31,7 +31,7 @@ import { ModalContainerComponent } from './modal-container/modal-container.compo
     FormsModule,
     HttpClientModule,
     //returns simulated server responses.
-    HttpClientInMemoryWebApiModule.forRoot(
+    InMemoryWebApiModule.forRoot(
       DataService, { dataEncapsulation: false }
     )
   ],

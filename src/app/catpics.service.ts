@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { PicModal } from './picmodal';
 
@@ -9,7 +9,7 @@ import { PicModal } from './picmodal';
   providedIn: 'root'
 })
 export class CatpicsService {
-  private catPicsUrl = 'api/catpics';
+  public catPicsUrl = 'api/catpics';
   //SERVER_URL: string = "http://localhost:8080/api/"; //dummy (any url accepted by in-memory-api)
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,6 +30,14 @@ export class CatpicsService {
     return this.http.get<PicModal>(url).pipe(
       tap(_ => this.log(`fetched cat pic id=${id}`)),
       catchError(this.handleError<PicModal>(`getCatPic id=${id}`))
+    );
+  }
+
+  updatePic(pic: PicModal): Observable<PicModal> {
+    const url = `${this.catPicsUrl}/${pic.id}`;
+    return this.http.put<PicModal>(this.catPicsUrl, pic, this.httpOptions).pipe(
+      map(() => pic),
+      catchError(this.handleError)
     );
   }
 

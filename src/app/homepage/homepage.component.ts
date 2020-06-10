@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CatpicsService } from '../catpics.service';
+import { PicModal } from '../picmodal';
 
 @Component({
   selector: 'app-homepage',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
+  pics: Array<PicModal>;
 
-  constructor() { }
+  constructor(private picProvider: CatpicsService) { }
 
   ngOnInit(): void {
+    this.picProvider.getPics().subscribe(
+      (data: Array<PicModal>) => {
+        console.log(data);
+        this.pics = data;
+      }
+    );
   }
+
 
 }

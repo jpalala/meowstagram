@@ -8,15 +8,19 @@ export class DataService implements InMemoryDbService {
 
   constructor() { }
   createDb() {
-    let pics = [
-      { id: '1591715036975', image: "catpic001.jpg", caption: "A picture of a cat" },
-      { id: '1591715036976', image: "catpic001.jpg", caption: "A picture of a cat" },
-      { id: '1591715036977', image: "catpic001.jpg", caption: "A picture of a cat" },
-      { id: '1591715036978', image: "catpic001.jpg", caption: "A picture of a cat" },
-      { id: '1591715036979', image: "catpic001.jpg", caption: "A picture of a cat" },
-      { id: '1591715036980', image: "catpic001.jpg", caption: "A picture of a cat" }
+    let catpics = [
+      { id: '1591715036975', image: "cat001.jpg", caption: "A picture of a cat" },
+      { id: '1591715036976', image: "cat002.jpg", caption: "A picture of a cat" },
+      { id: '1591715036976', image: "cat001.jpg", caption: "A picture of a cat" },
+      { id: '1591715036976', image: "cat001.jpg", caption: "A picture of a cat" },
+      { id: '1591715036977', image: "cat001.jpg", caption: "A picture of a cat" },
+      { id: '1591715036978', image: "cat001.jpg", caption: "A picture of a cat" },
+      { id: '1591715036979', image: "cat001.jpg", caption: "A picture of a cat" },
+      { id: '1591715036980', image: "cat001.jpg", caption: "A picture of a cat" },
+      { id: '1591715036981', image: "cat001.jpg", caption: "A picture of a cat" }
+
     ];
-    return { pics };
+    return { catpics };
   }
 
 }

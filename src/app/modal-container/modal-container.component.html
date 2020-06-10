@@ -1,9 +1,9 @@
 <h3 class="modal-title">I have a nice title</h3>
 <div class="modal-body">
-  <img src="" />
+  <img src="assets/images/cat001.jpg">
   <ng-template>
     <p>
-        Kung anong content niyan dito yan
+        Kung anong caption
     </p>
   </ng-template>
   <form #f="ngForm">
@@ -18,5 +18,5 @@
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-outline" (click)="activeModal.close('Cancel click')">Cancel</button>
-  <button type="button" class="btn btn-primary">Save</button>
+  <button type="button" class="btn btn-primary" (click)="updateCaption(model.id)">Save</button>
 </div>
