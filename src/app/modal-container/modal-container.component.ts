@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { PicModal } from '../picmodal';
 import { CatpicsService } from '../catpics.service';
+// import {ReactiveFormsModule }  from '@angular/forms';
 
 
 @Component({
@@ -14,6 +15,7 @@ export class ModalContainerComponent implements OnInit {
   @Input() public caption: string;
   @Input() public image: string;
   @Input() public picObj: any;
+  @Output() public captionChange: EventEmitter<any> = new EventEmitter<any>();
 
   open: boolean;
   model: PicModal;
@@ -21,21 +23,30 @@ export class ModalContainerComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private catpicsService: CatpicsService) {  }
 
   ngOnInit(): void {
-    const newPicObj  = new PicModal(this.id, this.caption, this.image); //create a new copy?
+    const newPicObj = new PicModal(this.id, this.image, this.caption); //create a new copy?
     console.log('New Data! ', newPicObj);
+
+    // populates this.model tied to the ngModel with picObj
+    // otherwise, the model will create an empty one
     this.model = newPicObj;
   }
 
   updateCaption(id: string) {
  //   if (todoObj.id && todoObj.id !== null) {
     this.catpicsService.getPic(id).subscribe(data => {
-      this.model = data;
-      this.model.caption = 'A caption';
-      this.catpicsService.updatePic(this.model).subscribe(data1 => {
-        return data1;
+      console.log('updateCaption  for:', data.id)
+      // modify the data with the one from the ngModel
+      data.caption = this.model.caption;
+      this.catpicsService.updatePic(data).subscribe(data1 => {
+        console.log('Updated caption to', data1.caption);
+        this.captionChange.emit(data1.caption);
+
       });
     });
+
     this.activeModal.close('Updated caption');
   }
+
+
 }
 /* Container for the modal, lls ngBModal apis */

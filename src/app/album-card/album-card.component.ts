@@ -49,17 +49,29 @@ export class AlbumCardComponent implements OnInit {
     modalRef.componentInstance.id = this.id;
     modalRef.componentInstance.caption = this.caption;
     modalRef.componentInstance.image = this._imageFullPath;
+    modalRef.componentInstance.captionChange.subscribe((receivedCaptionChangeEvent) => {
+      console.log(receivedCaptionChangeEvent);
+      this.caption = receivedCaptionChangeEvent;
+    })
 
+  
     // pass the entire pic instance into the instance
-     this.catpicsService.getPic(this.picId).subscribe(
-      (data: PicModal) => {
-        console.log('pIC DATA:', data);
-        /*
-        modalRef.componentInstance.caption= data.caption;
-        modalRef.componentInstance.image = data.image;
-        modalRef.componentInstance.id = data.image;
-        */
-    });
+    //  this.catpicsService.getPic(this.picId).subscribe(
+    //   (data: PicModal) => {
+    //     console.log('pIC DATA:', data);
+    //     /*
+    //     modalRef.componentInstance.caption= data.caption;
+    //     modalRef.componentInstance.image = data.image;
+    //     modalRef.componentInstance.id = data.image;
+    //     */
+    // });
+
+
+  }
+
+  // triggers when modal captionChange emits
+  captionChangeHandler(event) {
+    console.log('EVENT (captionChangeHandler):', event);
   }
 
   //STUB
