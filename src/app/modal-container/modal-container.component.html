@@ -1,7 +1,8 @@
 <h3 class="modal-title">View/Edit Cat Caption</h3>
 <div class="modal-body">
   <img src="assets/images/cat001.jpg">
-  <form>
+
+  <form *ngIf="editing; else noForm">
     <div class="form-group">
       <label for="Caption">Caption</label>
       <input type="text" class="form-control" id="caption" name="caption" required [(ngModel)]="model.caption">
@@ -9,8 +10,10 @@
     <!-- somehow not showing.. -->
       <input type="hidden" class="hidden" id="id" name="id" [(ngModel)]="model.id">
       <input type="hidden" class="hidden" id="image" name="image"  [(ngModel)]="model.image">
-
   </form>
+  <div class="card-caption">
+      <ng-template #noForm>{{caption}}</ng-template>
+  </div>
   <pre>
     {{  model | json }}
   </pre>
@@ -18,5 +21,5 @@
 <div class="modal-footer">
   <button type="button" class="btn btn-outline" (click)="activeModal.close('Cancel click')">Cancel</button>
   <!-- Trigger on updateCaption() below the emit back event to let albumcard know a change occured-->
-  <button type="button" class="btn btn-primary" (click)="updateCaption(model.id)">Save</button>
+  <button *ngIf="editing" type="button" class="btn btn-primary" (click)="updateCaption(model.id)">Save</button>
 </div>

@@ -16,7 +16,7 @@ export class ModalContainerComponent implements OnInit {
   @Input() public image: string;
   @Input() public picObj: any;
   @Output() public captionChange: EventEmitter<any> = new EventEmitter<any>();
-
+  public editing: boolean;
   open: boolean;
   model: PicModal;
 

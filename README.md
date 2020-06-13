@@ -4,6 +4,10 @@
 
 A project with pictures of cats.
 
+## Screenshot
+
+![meowstagram running locally](./screenshot.png)
+
 ### Angular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7. 
